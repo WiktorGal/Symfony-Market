@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %} {%block title%}Welcome{%endblock%} 
+{% block content %}
+
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+  <h2 class="mb-12 text-2xl text-center">Newest items</h2>
+  <div class="grid grid-cols-3 gap-3">
+    {# {% for i in items %}
+    <div>
+      <a href="{% url 'item:detail' i.id %}">
+        <div class="bg-white rounded-t-xl">
+          <img src="{{ i.image.url }}" alt="item" class="mx-auto" />
+        </div>
+        <div class="p-6 bg-white rounded-b-xl">
+          <h2 class="text-2xl">{{ i.name }}</h2>
+          <p class="text-gray-500">Price: {{ i.price }}</p>
+        </div>
+      </a>
+    </div>
+    {% endfor %} #}
+  </div>
+</div>
+
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+  <h2 class="mb-12 text-2xl text-center">Categories items</h2>
+  <div class="grid grid-cols-3 gap-3">
+    {# {% for c in categories %}
+    <div>
+      <a href="{% url 'item:items' %}?query={{query}}&category={{c.id}}">
+        <div class="p-6 bg-white rounded-xl">
+          <h2 class="text-2xl">{{ c.name }}</h2>
+          <p class="text-gray-500">{{ c.items.count }}</p>
+        </div>
+      </a>
+    </div>
+    {% endfor %} #}
+  </div>
+</div>
+
+{% endblock %}
