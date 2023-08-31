@@ -1,20 +1,47 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello ItemController!{% endblock %}
-
+ {% block title %}{{ item.name }}{% endblock %} 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="grid grid-cols-5 gap-6">
+  <div class="col-span-3">
+    {# <img class="rounded-xl" src="{{ item.image.url }}" alt="image" /> #}
+  </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+  <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
+    <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
+    <p class="text-gray-500"><strong>Price: </strong> {{ item.price }}</p>
+    <p class="text-gray-500">
+      <strong>Seller: </strong> {{ item.createdBy.email }}
+    </p>
+  
+    {% if item.description %}
+    <p class="text-gray-700">
+      <strong class="text-gray-500">Description: </strong><br />
+      {{ item.description|raw }}
+    </p>
+    {% endif %} 
+    <a href="#"
+    class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 rounded-xl text-white hover:bg-teal-700"
+    >Contact seller</a>
+  </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/wgala/Symfony/Market/marketplace/src/Controller/ItemController.php'|file_link(0) }}">src/Controller/ItemController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/wgala/Symfony/Market/marketplace/templates/item/index.html.twig'|file_link(0) }}">templates/item/index.html.twig</a></code></li>
-    </ul>
-</div>
+  <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Related items</h2>
+    <div class="grid grid-cols-3 gap-3">
+      {% for relatedItem in related_items %}
+      <div>
+        <a href="{{ path('item_detail', {'id': relatedItem.id}) }}">
+          <div class="bg-white rounded-t-xl">
+            {# <img src="{{ asset('path/to/your/images/' ~ relatedItem.imageName) }}" alt="item" class="mx-auto" /> #}
+          </div>
+          <div class="p-6 bg-white rounded-b-xl">
+            <h2 class="text-2xl">{{ relatedItem.name }}</h2>
+            <p class="text-gray-500">Price: {{ relatedItem.price }}</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  
 {% endblock %}

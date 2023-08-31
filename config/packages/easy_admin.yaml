@@ -1,0 +1,27 @@
+easy_admin:
+  entities:
+    Item:
+      class: App\Entity\Item
+      form:
+        fields:
+          - name
+          - description
+          - price
+          - isSold
+          - createdAt
+          - { property: 'category.name', label: 'Category' }
+          - { property: 'createdBy.email', label: 'Created By' }
+          - { property: 'imageName', label: 'Image', type: 'image', base_path: '/uploads/images' }
+        actions:
+          - { name: 'edit' }
+          - { name: 'delete' }
+      edit:
+        fields:
+          - name
+          - description
+          - price
+          - isSold
+          - createdAt
+          - { property: 'category', type: 'association' }
+          - { property: 'createdBy', type: 'association' }
+          - { property: 'imageName', label: 'Image', type: 'image', base_path: '/uploads/images', uploaded_file_helper: 'This image is already uploaded: ', delete_label: 'Remove the current image', allow_delete: true }

@@ -1,38 +1,37 @@
-{% extends 'base.html.twig' %} {%block title%}Welcome{%endblock%} 
-{% block content %}
+{% extends 'base.html.twig' %}
+{% block title %}Welcome{% endblock %} 
+{% block body %}
 
 <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
   <h2 class="mb-12 text-2xl text-center">Newest items</h2>
   <div class="grid grid-cols-3 gap-3">
-    {# {% for i in items %}
+    {% for item in items %}
     <div>
-      <a href="{% url 'item:detail' i.id %}">
+      <a href="{{ path('item_detail', {'id': item.id}) }}">
         <div class="bg-white rounded-t-xl">
-          <img src="{{ i.image.url }}" alt="item" class="mx-auto" />
+          {# <img src="{{ item.imageName | imagine_filter('your_image_filter') }}" alt="item" class="mx-auto" /> #}
         </div>
         <div class="p-6 bg-white rounded-b-xl">
-          <h2 class="text-2xl">{{ i.name }}</h2>
-          <p class="text-gray-500">Price: {{ i.price }}</p>
+          <h2 class="text-2xl">{{ item.name }}</h2>
+          <p class="text-gray-500">Price: {{ item.price }}</p>
         </div>
       </a>
     </div>
-    {% endfor %} #}
+    {% endfor %}
   </div>
 </div>
 
 <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
   <h2 class="mb-12 text-2xl text-center">Categories items</h2>
   <div class="grid grid-cols-3 gap-3">
-    {# {% for c in categories %}
+    {% for category in categories %}
     <div>
-      <a href="{% url 'item:items' %}?query={{query}}&category={{c.id}}">
-        <div class="p-6 bg-white rounded-xl">
-          <h2 class="text-2xl">{{ c.name }}</h2>
-          <p class="text-gray-500">{{ c.items.count }}</p>
-        </div>
-      </a>
+      <div class="p-6 bg-white rounded-xl">
+        <h2 class="text-2xl">{{ category.name }}</h2>
+        <p class="text-gray-500">{{ category.itemCount }} items</p>
+      </div>
     </div>
-    {% endfor %} #}
+    {% endfor %}
   </div>
 </div>
 
