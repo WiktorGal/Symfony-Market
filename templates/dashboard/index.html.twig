@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+  <h2 class="mb-12 text-2xl text-center">My items</h2>
+  <div class="grid grid-cols-3 gap-3">
+    {% for item in items %}
+    <div>
+      <a href="{{ path('item_detail', {'id': item.id}) }}">
+            <div class="bg-white rounded-t-xl overflow-hidden" style="height: 250px; width: 100%; max-width: 100%;">
+              {% if item.imageName %}
+              <img src="{{ asset('images/Item/' ~ item.imageName) }}" alt="Item image" class="w-full h-full object-cover">
+              {% else %}
+                <div class="w-full h-full flex items-center justify-center bg-gray-300">
+                  <span class="fas fa-camera fa-5x text-gray-500">📷</span>
+                </div>
+              {% endif %}
+        </div>
+        <div class="p-6 bg-white rounded-b-xl">
+          <h2 class="text-2xl">{{ item.name }}</h2>
+          <p class="text-gray-500">Price: {{ item.price }}</p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

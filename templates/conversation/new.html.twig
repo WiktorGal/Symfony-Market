@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New conversation{% endblock %}
+
+{% block body %}
+<div class="border gray-black rounded-xl p-4 mb-4">
+    <div class="flex items-center mb-4">
+        <div class="pr-4">
+            {% if conversation.item.imageName %}
+                <img src="{{ asset('images/Item/' ~ conversation.item.imageName) }}" alt="Item image" class="w-20 rounded-xl">
+            {% else %}
+                <div class="w-20 h-20 rounded-xl flex items-center justify-center bg-gray-300">
+                    <span class="fas fa-camera fa-3x text-gray-500">📷</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="text-2xl font-bold">New conversation for {{ conversation.item.name }}</div>
+    </div>
+</div>
+
+<form action="{{ path('conversation_new', {'itemPk': item.id}) }}" enctype="multipart/form-data" method="post">
+    
+    {{ form_start(form) }}
+
+    <div class="space-y-4 py-3 px-6 bg-gray-100 rounded-b-xl">
+        {{ form_row(form.content) }}
+    </div>
+
+
+    {% if form_errors(form) %}
+    <div class="mb-3 p-6 bg-red-100 rounded-xl">
+        {{ form_errors(form) }}
+    </div>
+    {% endif %}
+
+    <button class="mt-6 py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Send</button>
+    {{ form_end(form) }}
+</form>
+{% endblock %}

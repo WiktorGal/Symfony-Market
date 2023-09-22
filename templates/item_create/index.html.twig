@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create a New Item{% endblock %}
+
+{% block body %}
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+  <h2 class="mb-12 text-2xl text-center">Create a New Item</h2>
+  <form method="post" class="w-full max-w-md mx-auto" enctype="multipart/form-data">
+
+    {{ form_errors(form) }}
+
+    {{ form_start(form) }}
+
+    <div class="mb-4">
+        {{ form_label(form.category, 'Category', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+        {{ form_widget(form.category, {'attr': {'class': 'w-full py-2 px-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400'}}) }}
+    </div>
+    
+    <div class="mb-4">
+        {{ form_label(form.name, 'Name', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'w-full py-2 px-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400'}}) }}
+    </div>
+    
+    <div class="mb-4">
+        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+        {{ form_widget(form.description, {'attr': {'class': 'w-full py-2 px-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400'}}) }}
+    </div>
+    
+    <div class="mb-4">
+      {{ form_label(form.price, 'Price', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+      {{ form_widget(form.price, {'attr': {'class': 'w-full py-2 px-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400', 'type': 'number'}}) }}
+    </div>
+  
+    
+    <div class="mb-4">
+        {{ form_label(form.imageFile, 'Image', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+        {{ form_widget(form.imageFile, {'attr': {'class': 'w-full py-2 px-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400'}}) }}
+    </div>
+    
+    {{ form_row(form._token) }}
+
+    <button class="mt-6 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+      Create Item
+    </button>
+
+    {{ form_end(form) }}
+  </form>
+</div>
+{% endblock %}

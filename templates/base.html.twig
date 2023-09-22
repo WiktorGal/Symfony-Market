@@ -11,17 +11,20 @@
         <a href="{{ path('homepage') }}" class="text-xl font-semibold">Marketplace</a>
 
         <div class="space-x-6">
-            <a href="#" class="text-lg fornt-semibold hover:text-gray-500">New item</a>
-            <a href="#" class="text-lg fornt-semibold hover:text-gray-500">Browse</a>
+            <a href="{{ path('item_new') }}" class="text-lg font-semibold hover:text-gray-500">New item</a>
 
-            {# {% if request.user.is_authenticated %}
-                <a href="#" class="px-6 py-3 text-lg fornt-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Inbox</a>
-                <a href="#" class="px-6 py-3 text-lg fornt-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Dashboard</a>
-                <a href="#" class="px-6 py-3 text-lg fornt-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Sign out</a>
-            {% else %} #}
-                <a href="#" class="px-6 py-3 text-lg fornt-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
-                <a href="#" class="px-6 py-3 text-lg fornt-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>  
-            {# {% endif %} #}
+            <a href="{{ path('item_browse') }}" class="text-lg font-semibold hover:text-gray-500">Browse</a>
+
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('inbox') }}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Inbox</a>
+                <a href="{{ path('app_dashboard') }}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Dashboard</a>
+                <a href="{{ path('app_logout') }}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Sign out</a>
+            {% else %}
+                <a href="{{ path('app_register') }}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
+                <a href="{{ path('app_login') }}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
+            {% endif %}
+        
         </div>
     </nav>
     <div class="px-6 py-6">

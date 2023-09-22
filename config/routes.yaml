@@ -1,3 +1,28 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+app_login:
+    path: /login
+    controller: App\Controller\LoginController::login
+
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+app_logout:
+    path: /logout
+
+app_dashboard:
+    path: /dashboard
+    controller: App\Controller\DashboardController::index
+
+
+conversation_new:
+    path: /conversation/new/{itemPk}
+    controller: App\Controller\ConversationController::newConversation
+    methods: ['GET', 'POST']
+
+message_send:
+    path: '/conversation/message/send/{id}'
+    controller: 'App\Controller\MessageController::sendMessage'

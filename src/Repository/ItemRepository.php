@@ -10,15 +10,16 @@ class ItemRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Item::class); // Use the correct entity class
+        parent::__construct($registry, Item::class); 
     }
 
     public function findNewestItems($limit)
     {
         return $this->createQueryBuilder('i')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+        ->orderBy('i.createdAt', 'DESC') 
+        ->setMaxResults($limit)
+        ->getQuery()
+        ->getResult();
     }
 
     public function findAllCategoriesWithItemCount()

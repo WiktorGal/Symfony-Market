@@ -43,5 +43,4 @@ class Category
     {
         $this->items = new ArrayCollection();
     }
-
 }

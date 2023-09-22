@@ -1,5 +1,6 @@
 doctrine:
     dbal:
+        logging: true
         url: '%env(resolve:DATABASE_URL)%'
 
         # IMPORTANT: You MUST configure your server version,
@@ -16,12 +17,13 @@ doctrine:
                 prefix: 'App\Entity'
                 alias: App
 
+    # Define separate configurations for different environments
+    # In your case, 'test' and 'prod'
 when@test:
     doctrine:
         dbal:
             # "TEST_TOKEN" is typically set by ParaTest
             dbname_suffix: '_test%env(default::TEST_TOKEN)%'
-
 when@prod:
     doctrine:
         orm:
@@ -34,10 +36,10 @@ when@prod:
                 type: pool
                 pool: doctrine.result_cache_pool
 
-    framework:
-        cache:
-            pools:
-                doctrine.result_cache_pool:
-                    adapter: cache.app
-                doctrine.system_cache_pool:
-                    adapter: cache.system
+            framework:
+                cache:
+                    pools:
+                        doctrine.result_cache_pool:
+                            adapter: cache.app
+                        doctrine.system_cache_pool:
+                            adapter: cache.system

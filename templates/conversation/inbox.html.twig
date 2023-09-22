@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inbox{% endblock %}
+
+{% block body %}
+    <h1 class="mb-6 text-3xl">Inbox</h1>
+
+    <div class="space-y-6">
+        {% for conversation in conversations %}
+            <a href="{{ path('conversation_detail', {'pk': conversation.id, 'itemPk': conversation.item.id}) }}">
+                <div class="p-6 mb-3 flex bg-gray-100 rounded-xl">
+                    <div class="pr-6 flex items-center">
+                        {% if conversation.item.imageName %}
+                            <img src="{{ asset('images/Item/' ~ conversation.item.imageName) }}" alt="Item image" class="w-20 rounded-xl">
+                        {% else %}
+                            <div class="w-20  h-20 rounded-xl flex items-center justify-center bg-gray-300">
+                                <span class="fas fa-camera fa-3x text-gray-500">📷</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="mb-4"><strong>Created By: {{ conversation.createdBy.email }}</strong> | Created At: {{ conversation.createdAt|date('Y-m-d H:i:s') }}</p>
+                        <p class="font-bold text-gray-800 mb-2">Item Name: {{ conversation.item.name }}</p>
+
+                        {% if conversation.messages|length > 0 %}
+                            {% set lastMessage = conversation.messages|last %}
+                            <div class="bg-gray-100 p-4 border border-gray-300 rounded-lg">
+                                <p class="text-sm text-gray-600 mb-2">
+                                    <span class="font-bold">{{ lastMessage.createdAt|date('m-d H:i') }}</span>
+                                    <span>{{ lastMessage.createdBy.email }}:  <span class="font-bold">{{ lastMessage.content }}</span></span>
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

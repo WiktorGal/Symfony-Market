@@ -23,5 +23,9 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    # Define your additional services here
+    App\Entity\Item:
+        public: true
+
     # Add more service definitions when explicit configuration is needed
     # Please note that last definitions always *replace* previous ones

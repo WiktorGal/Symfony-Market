@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block body %}
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+  <h2 class="mb-12 text-2xl text-center">Sign up</h2>
+  <form method="post" class="w-full max-w-md mx-auto">
+    {{ form_widget(form._token) }}
+
+    <div class="mb-3">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="inputEmail">Email</label>
+      {{ form_widget(form.email, {'attr': {'class': 'w-full py-2 px-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400'}}) }}
+    </div>
+    
+    {% if form.email.vars.errors|length > 0 %}
+      <div class="text-red-600">
+        {{ form_errors(form.email) }}
+      </div>
+    {% endif %}
+
+    <div class="mb-3">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="inputPassword">Password</label>
+      {{ form_widget(form.plainPassword, {'id': 'passwordField', 'attr': {'autocomplete': 'new-password', 'class': 'w-full py-2 px-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400'}}) }}
+  </div>
+  <div class="mb-3">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="repeat_password">Repeat password</label>
+      <input type="password" id="repeat_password" name="repeat_password" required class="w-full py-2 px-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400">
+  </div>
+  
+    <div class="mb-3">
+      <input type="checkbox" id="agreeTerms" name="registration_form[agreeTerms]" required checked class="form-checkbox h-5 w-5 text-blue-600">
+      <label for="agreeTerms" class="inline-block ml-2 text-gray-700 text-sm font-bold mb-2">Agree to Terms</label>
+    </div>
+
+    {% if form_errors(form) %}
+      <div class="mb-3 p-6 bg-red-100 rounded-xl">
+        {{ form_errors(form) }}
+      </div>
+    {% endif %}
+
+    <button class="mt-6 w-full bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+      Submit
+    </button>
+  </form>
+</div>
+<script>
+  const passwordField = document.getElementById('passwordField');
+  const repeatPasswordField = document.getElementById('repeat_password');
+
+  repeatPasswordField.addEventListener('input', () => {
+      if (passwordField.value !== repeatPasswordField.value) {
+          repeatPasswordField.setCustomValidity('Passwords do not match');
+      } else {
+          repeatPasswordField.setCustomValidity('');
+      }
+  });
+</script>
+
+{% endblock %}

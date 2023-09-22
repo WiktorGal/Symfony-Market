@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
- {% block title %}{{ item.name }}{% endblock %} 
+{% block title %}{{ item.name }}{% endblock %} 
+
 {% block body %}
 <div class="grid grid-cols-5 gap-6">
   <div class="col-span-3">
-    {# <img class="rounded-xl" src="{{ item.image.url }}" alt="image" /> #}
+    <img src="{{ asset('images/Item/' ~ item.imageName) }}" alt="item" class="mx-auto">
   </div>
 
   <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
@@ -12,36 +13,47 @@
     <p class="text-gray-500">
       <strong>Seller: </strong> {{ item.createdBy.email }}
     </p>
-  
     {% if item.description %}
     <p class="text-gray-700">
       <strong class="text-gray-500">Description: </strong><br />
       {{ item.description|raw }}
     </p>
     {% endif %} 
-    <a href="#"
-    class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 rounded-xl text-white hover:bg-teal-700"
-    >Contact seller</a>
-  </div>
 
-  <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
-    <h2 class="mb-12 text-2xl text-center">Related items</h2>
-    <div class="grid grid-cols-3 gap-3">
-      {% for relatedItem in related_items %}
-      <div>
-        <a href="{{ path('item_detail', {'id': relatedItem.id}) }}">
-          <div class="bg-white rounded-t-xl">
-            {# <img src="{{ asset('path/to/your/images/' ~ relatedItem.imageName) }}" alt="item" class="mx-auto" /> #}
-          </div>
-          <div class="p-6 bg-white rounded-b-xl">
-            <h2 class="text-2xl">{{ relatedItem.name }}</h2>
-            <p class="text-gray-500">Price: {{ relatedItem.price }}</p>
-          </div>
-        </a>
-      </div>
-      {% endfor %}
+    {% if app.user == item.createdBy %}
+    <div class="mt-6 p-6 bg-white rounded-xl">
+        <p>This is your item!</p>
+        <a href="{{ path('item_edit', {'id': item.id}) }}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl">Edit</a>
+        <a href="{{ path('item_delete', {'id': item.id}) }}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl">Delete</a>
     </div>
+    {% else %}
+    <a href="{{ path('conversation_new', {'itemPk': item.id}) }}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 rounded-xl text-white hover:bg-teal-700">Contact seller</a>
+    {% endif %}
   </div>
-  
-  
+</div>
+
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+  <h2 class="mb-12 text-2xl text-center">Related items</h2>
+  <div class="grid grid-cols-3 gap-3">
+    {% for relatedItem in related_items %}
+    <div>
+      <a href="{{ path('item_detail', {'id': relatedItem.id}) }}">
+        <div class="bg-white rounded-t-xl overflow-hidden" style="height: 250px; width: 100%; max-width: 100%;">
+          {% if relatedItem.imageName %}
+          <img src="{{ asset('images/Item/' ~ relatedItem.imageName) }}" alt="Item image" class="w-full h-full object-cover">
+          {% else %}
+            <div class="w-full h-full flex items-center justify-center bg-gray-300">
+              <span class="fas fa-camera fa-5x text-gray-500">📷</span>
+            </div>
+          {% endif %}
+        </div>
+        <div class="p-6 bg-white rounded-b-xl">
+          <h2 class="text-2xl">{{ relatedItem.name }}</h2>
+          <p class="text-gray-500">Price: {{ relatedItem.price }}</p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
