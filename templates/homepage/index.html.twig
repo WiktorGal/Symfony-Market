@@ -9,7 +9,7 @@
       <div class="grid grid-cols-3 gap-3">
         {% for newestItem in newestItems %}
           <a href="{{ path('item_detail', {'id': newestItem.id}) }}" class="relative">
-            <div class="bg-white rounded-t-xl overflow-hidden" style="height: 250px; width: 100%; max-width: 100%;">
+            <div class="bg-white rounded-t-xl overflow-hidden" style="height: 350px; width: 100%; max-width: 100%;">
               {% if newestItem.imageName %}
               <img src="{{ asset('images/Item/' ~ newestItem.imageName) }}" alt="Item image" class="w-full h-full object-cover">
               {% else %}
@@ -35,12 +35,14 @@
   <h2 class="mb-12 text-2xl text-center">Categories items</h2>
   <div class="grid grid-cols-3 gap-3">
     {% for category in categories %}
+    <a href="{{ path('item_browse', {'category': category.id}) }}">
     <div>
       <div class="p-6 bg-white rounded-xl">
         <h2 class="text-2xl">{{ category.name }}</h2>
         <p class="text-gray-500">{{ category.itemCount }} items</p>
       </div>
     </div>
+    </a>
     {% endfor %}
   </div>
 </div>
