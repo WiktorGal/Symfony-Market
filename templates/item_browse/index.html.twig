@@ -45,9 +45,9 @@
       {% for item in items %}
       <div>
         <a href="{{ path('item_detail', {'id': item.id}) }}">
-          <div class="bg-white rounded-t-xl overflow-hidden" style="height: 350px; width: 100%; max-width: 100%;">
+          <div class="bg-white rounded-t-xl overflow-hidden h-96">
             {% if item.imageName %}
-            <img src="{{ asset('images/Item/' ~ item.imageName) }}" alt="Item image" class="w-full h-full object-cover">
+            <img src="{{ asset('images/Item/' ~ item.imageName) }}" alt="Item image" class="mx-auto h-full object-cover">
             {% else %}
               <div class="w-full h-full flex items-center justify-center bg-gray-300">
                 <span class="fas fa-camera fa-5x text-gray-500">📷</span>

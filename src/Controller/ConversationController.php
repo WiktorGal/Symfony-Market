@@ -96,6 +96,7 @@ class ConversationController extends AbstractController
         return $this->render('conversation/new.html.twig', [
             'form' => $form->createView(),
             'item' => $item,
+            'conversations' => $conversations,
         ]);
     }
 

@@ -3,9 +3,15 @@
 
 {% block body %}
 <div class="grid grid-cols-5 gap-6">
-  <div class="col-span-3">
-    <img src="{{ asset('images/Item/' ~ item.imageName) }}" alt="item" class="mx-auto">
-  </div>
+    <div class="col-span-3">
+      {% if item.imageName %}
+      <img src="{{ asset('images/Item/' ~ item.imageName) }}" alt="Item image" class="mx-auto h-full object-cover" style="height: 550px;">
+      {% else %}
+        <div class="w-full h-full flex items-center justify-center bg-gray-300"style="height: 550px;">
+          <span class="fas fa-camera fa-5x text-gray-500">📷</span>
+        </div>
+      {% endif %}
+    </div>
 
   <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
     <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
@@ -38,9 +44,9 @@
     {% for relatedItem in related_items %}
     <div>
       <a href="{{ path('item_detail', {'id': relatedItem.id}) }}">
-        <div class="bg-white rounded-t-xl overflow-hidden" style="height: 250px; width: 100%; max-width: 100%;">
+        <div class="bg-white rounded-t-xl overflow-hidden h-96">
           {% if relatedItem.imageName %}
-          <img src="{{ asset('images/Item/' ~ relatedItem.imageName) }}" alt="Item image" class="w-full h-full object-cover">
+          <img src="{{ asset('images/Item/' ~ relatedItem.imageName) }}" alt="Item image" class="mx-auto h-full object-cover">
           {% else %}
             <div class="w-full h-full flex items-center justify-center bg-gray-300">
               <span class="fas fa-camera fa-5x text-gray-500">📷</span>
